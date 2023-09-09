@@ -5,6 +5,7 @@ import com.bajidev.studentms.repository.StudentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 public class StudentServiceImpl implements StudentService {
@@ -21,18 +22,14 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Student saveStudent(Student student) {
-        return studentRepository.save(student);
+    public void saveStudent(Student student) {
+         studentRepository.save(student);
     }
 
     @Override
     public Student getStudentById(Long id) {
-        return studentRepository.findById(id).get();
-    }
-
-    @Override
-    public Student updateStudent(Student student) {
-        return studentRepository.save(student);
+        return studentRepository.findById(id)
+                .orElseThrow(() -> new NoSuchElementException("Not found"));
     }
 
     @Override

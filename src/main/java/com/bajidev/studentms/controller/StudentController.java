@@ -28,19 +28,23 @@ public class StudentController {
         model.addAttribute("student", student);
         return "create_student";
     }
+
+    @PostMapping("/students")
+    public String saveStudent(@ModelAttribute("student") Student student) {
+        studentService.saveStudent(student);
+
+        return "redirect:/students";
+    }
+
     @GetMapping("/students/edit/{id}")
     public String updateStudent(@PathVariable Long id, Model model) {
         model.addAttribute("student", studentService.getStudentById(id));
         return "edit_student";
     }
-    @PostMapping("/students")
-    public String saveStudent(@ModelAttribute("student") Student student) {
-        studentService.saveStudent(student);
-        return "redirect:/students";
-    }
+
 
     @PostMapping("/students/{id}")
-    public  String updateStudent(@PathVariable Long id, @ModelAttribute("student") Student student, Model model) {
+    public  String updateStudent(@PathVariable Long id, @ModelAttribute("student") Student student) {
         //get student from database by id
         Student existingStudent = studentService.getStudentById(id);
         existingStudent.setId(id);
@@ -49,7 +53,7 @@ public class StudentController {
         existingStudent.setEmail(student.getEmail());
 
         //save updated student
-        studentService.updateStudent(existingStudent);
+        studentService.saveStudent(existingStudent);
         return "redirect:/students";
     }
 

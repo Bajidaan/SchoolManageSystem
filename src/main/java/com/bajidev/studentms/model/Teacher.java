@@ -2,9 +2,12 @@ package com.bajidev.studentms.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Entity
-@Data
+@Getter
+@Setter
 @Table(name = "teachers")
 public class Teacher {
     @Id
