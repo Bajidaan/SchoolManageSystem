@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("/teachers")
 public class TeacherController {
     private final TeacherService teacherService;
 
@@ -18,13 +19,13 @@ public class TeacherController {
         this.teacherService = teacherService;
     }
 
-    @GetMapping("/teachers")
+    @GetMapping
     public String getAllTeaches(Model model) {
         model.addAttribute("teachers", teacherService.getAllTeachers());
         return "teachers";
     }
 
-    @GetMapping("/teachers/new")
+    @GetMapping("/new")
     public String addNewTeacher(Model model) {
         Teacher teacher = new Teacher();
 
@@ -32,20 +33,20 @@ public class TeacherController {
         return "create_teacher";
     }
 
-    @PostMapping("/teachers")
+    @PostMapping
     public String saveTeacher(@ModelAttribute("teacher") Teacher teacher) {
         teacherService.saveTeacher(teacher);
         return "redirect:/teachers";
     }
 
-    @GetMapping("/teachers/edit/{id}")
+    @GetMapping("/edit/{id}")
     public String editTeacher(@PathVariable Long id, Model model) {
 
         model.addAttribute("teacher", teacherService.findTeacherById(id));
         return "edit_teacher";
     }
 
-    @PostMapping("/teachers/edit/{id}")
+    @PostMapping("/edit/{id}")
     public String updateTeacher(@PathVariable Long id, @ModelAttribute("teacher") Teacher teacher) {
 
         Teacher existingTeacher = teacherService.findTeacherById(id);
@@ -61,7 +62,7 @@ public class TeacherController {
         return "redirect:/teachers";
     }
 
-    @GetMapping("teachers/{id}")
+    @GetMapping("/{id}")
     public String deleteTeacher(@PathVariable Long id) {
         teacherService.deleteTeacherById(id);
         return "redirect:/teachers";

@@ -1,17 +1,17 @@
 package com.bajidev.studentms;
 
-import com.bajidev.studentms.controller.TeacherController;
-import com.bajidev.studentms.model.Student;
-import com.bajidev.studentms.model.Teacher;
+
+import com.bajidev.studentms.config.RepositoryInitializer;
+import com.bajidev.studentms.repository.RoleRepository;
 import com.bajidev.studentms.repository.StudentRepository;
 import com.bajidev.studentms.repository.TeacherRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.bajidev.studentms.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
-import java.util.List;
 
 @SpringBootApplication
 public class StudentMsApplication {
@@ -21,17 +21,17 @@ public class StudentMsApplication {
 
         SpringApplication.run(StudentMsApplication.class, args);
 
+
+
     }
 
     @Bean
-    CommandLineRunner commandLineRunner(TeacherRepository teacherRepository, StudentRepository repository) {
+    CommandLineRunner commandLineRunner(TeacherRepository teacherRepository, StudentRepository repository,
+                                        UserRepository userRepository, RoleRepository roleRepository, PasswordEncoder encoder) {
         return args -> {
-//            teacherRepository.save(new Teacher("Babajide", "Daniju", "bajidan4u@gmail.com"));
-//            teacherRepository.save(new Teacher("Ruth", "Odufuwa", "ruth.com"));
-//           teacherRepository.save(new Teacher("Faruk", "Daniju", "bajidax4u@gmail.com"));
-//            repository.save(new Student("Jame", "Okoro", "bajidan4u@gmail.com"));
-//            repository.save(new Student("Titi", "Adebowale", "ruth.com"));
-//            repository.save(new Student("Jonas", "Jones", "bajidax4u@gmail.com"));
+
+//            RepositoryInitializer initializer = new RepositoryInitializer(teacherRepository, repository, userRepository, roleRepository, encoder);
+//            initializer.init();
 
 
         };

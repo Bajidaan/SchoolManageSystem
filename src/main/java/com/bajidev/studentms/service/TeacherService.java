@@ -5,8 +5,6 @@ import com.bajidev.studentms.repository.TeacherRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.NoSuchElementException;
-import java.util.Optional;
 
 @Service
 public class TeacherService {
